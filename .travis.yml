@@ -1,0 +1,54 @@
+---
+conditions: v1
+dist: xenial
+# Config file for automatic testing at travis-ci.org
+services:
+  - docker
+language: python
+
+jobs:
+  fast_finish: true
+  include:
+    # combined env improve execution speed on travis considerably
+    - name: lint,py37,distros
+      python: "3.7"
+      env: TOXENV=lint,py37,distros
+    - name: py36
+      python: "3.6"
+      env: TOXENV=py36
+    - name: py35
+      python: "3.5"
+      env: TOXENV=py35
+    - name: py27
+      python: "2.7"
+      env: TOXENV=py27
+    - name: devel
+      python: "3.7"
+      env: TOXENV=devel
+    - stage: deploy
+      name: deploy
+      env: TOXENV=upload
+      if: repo == "pycontribs/pytest-molecule" AND tag IS present AND type != cron
+      addons: {}
+      services: []
+
+install:
+  - pip install tox
+
+script:
+  - travis_wait tox
+
+before_cache:
+  - rm -rf $HOME/.cache/pip/log
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+addons:
+  apt:
+    packages:
+      - lxc
+      - lxc-dev
+      - lxd
+      - lxd-client
