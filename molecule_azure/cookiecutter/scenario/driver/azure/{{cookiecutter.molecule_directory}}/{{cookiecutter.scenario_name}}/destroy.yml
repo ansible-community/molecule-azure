@@ -15,7 +15,7 @@
         resource_group: "{{ resource_group_name }}"
         name: "{{ item.name }}"
         state: absent
-        remove_on_absent: 
+        remove_on_absent:
           - all_autocreated
       register: server
       with_items: "{{ molecule_yml.platforms }}"
