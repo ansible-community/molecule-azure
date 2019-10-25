@@ -11,7 +11,8 @@ language: python
 branches:
   only:
     - master
-    - /[0-9]+\.[0-9]+\.[0-9]+(.*)?$/
+    # https://stackoverflow.com/q/37972029/99834
+    - /^(\d+!)?(\d+)(\.\d+)+([\.\-\_])?((a(lpha)?|b(eta)?|c|r(c|ev)?|pre(view)?)\d*)?(\.?(post|dev)\d*)?$/
 
 cache:
   - pip
