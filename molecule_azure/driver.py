@@ -17,16 +17,16 @@
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
-
+import os
 from molecule import logger
-from molecule.driver import base
+from molecule.api import Driver
 
 from molecule import util
 
 LOG = logger.get_logger(__name__)
 
 
-class Azure(base.Base):
+class Azure(Driver):
     """
     The class responsible for managing `Azure`_ instances.  `Azure`_
     is ``not`` the default driver used in Molecule.
@@ -74,7 +74,7 @@ class Azure(base.Base):
     .. _`Azure`: https://azure.microsoft.com
     """  # noqa
 
-    def __init__(self, config):
+    def __init__(self, config=None):
         super(Azure, self).__init__(config)
         self._name = "azure"
 
@@ -141,6 +141,10 @@ class Azure(base.Base):
         # FIXME(decentral1se): Implement sanity checks
         pass
 
-
-def load(config):
-    return Azure(config)
+    def _get_template_path(self):
+        """ Return path to its own cookiecutterm templates. It is used by init
+        command in order to figure out where to load the templates from.
+        """
+        return os.path.join(
+            os.path.dirname(__file__), "cookiecutter/scenario/driver/azure"
+        )
