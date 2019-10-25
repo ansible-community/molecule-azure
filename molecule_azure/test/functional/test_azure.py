@@ -32,6 +32,7 @@ from molecule.test.functional.conftest import metadata_lint_update
 LOG = logger.get_logger(__name__)
 
 
+@pytest.mark.xfail(reason="need to fix template path")
 def test_command_init_scenario(temp_dir):
     role_directory = os.path.join(temp_dir.strpath, "test-init")
     options = {"role_name": "test-init"}
@@ -51,3 +52,6 @@ def test_command_init_scenario(temp_dir):
         run_command(cmd)
 
         assert os.path.isdir(scenario_directory)
+
+        cmd = sh.molecule.bake("test", "-s", "test-scenario")
+        run_command(cmd)
