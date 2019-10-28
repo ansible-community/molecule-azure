@@ -141,7 +141,7 @@ class Azure(Driver):
         # FIXME(decentral1se): Implement sanity checks
         pass
 
-    def _get_template_path(self):
+    def template_dir(self):
         """ Return path to its own cookiecutterm templates. It is used by init
         command in order to figure out where to load the templates from.
         """
