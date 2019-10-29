@@ -45,7 +45,7 @@ class Azure(Driver):
 
     .. code-block:: bash
 
-        $ pip install 'ansible[azure]'
+        $ pip install 'molecule-azure'
 
     Change the options passed to the ssh client.
 
