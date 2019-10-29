@@ -21,3 +21,4 @@
 
 
 from molecule.test.conftest import *  # noqa
+from molecule.test.conftest import temp_dir  # noqa F401 (fixture)

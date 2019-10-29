@@ -65,12 +65,13 @@
         jid: "{{ item.ansible_job_id }}"
       register: azure_jobs
       until: azure_jobs.finished
-      retries: 300
+      # fail after 1500s, average azure start time ~200s, avoid too many retries
+      retries: 100
+      delay: 15
       with_items: "{{ server.results }}"
 
 
     # Mandatory configuration for Molecule to function.
-
     - name: Populate instance config dict
       set_fact:
         instance_conf_dict: {
