@@ -11,6 +11,7 @@ language: python
 branches:
   only:
     - master
+    - devel
     # https://stackoverflow.com/q/37972029/99834
     - /^(\d+!)?(\d+)(\.\d+)+([\.\-\_])?((a(lpha)?|b(eta)?|c|r(c|ev)?|pre(view)?)\d*)?(\.?(post|dev)\d*)?$/
 
