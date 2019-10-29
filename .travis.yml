@@ -4,8 +4,6 @@ conditions: v1
 dist: xenial
 # Config file for automatic testing at travis-ci.org
 
-services:
-  - docker
 language: python
 
 branches:
@@ -62,11 +60,3 @@ env:
 
 before_cache:
   - rm -rf $HOME/.cache/pip/log
-
-addons:
-  apt:
-    packages:
-      - lxc
-      - lxc-dev
-      - lxd
-      - lxd-client
