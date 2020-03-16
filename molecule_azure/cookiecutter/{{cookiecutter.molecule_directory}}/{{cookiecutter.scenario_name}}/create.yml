@@ -4,7 +4,6 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  no_log: "{{ molecule_no_log }}"
   vars:
     resource_group_name: molecule
     location: "{{ lookup('env', 'AZURE_REGION') or 'westus' }}"

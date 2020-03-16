@@ -3,10 +3,6 @@ dependency:
   name: galaxy
 driver:
   name: azure
-lint:
-  name: yamllint
-  options:
-    config-file: ../../../resources/.yamllint
 platforms:
   - name: instance-1
     groups:
@@ -28,7 +24,7 @@ provisioner:
     group_vars:
       all:
         resource_group_name: molecule
-        location: westus
+        location: "{{ lookup('env', 'AZURE_REGION') or 'westus' }}"
         ssh_user: molecule
         ssh_port: 22
         virtual_network_name: molecule_vnet
@@ -36,11 +32,5 @@ provisioner:
         keypair_path: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
   env:
     ANSIBLE_ROLES_PATH: ../../../../../resources/roles/
-  lint:
-    name: ansible-lint
-scenario:
-  name: multi-node
 verifier:
   name: testinfra
-  lint:
-    name: flake8
