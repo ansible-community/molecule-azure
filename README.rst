@@ -31,7 +31,7 @@ resources.
 Documentation
 =============
 
-Read the documentation and more at https://molecule.readthedocs.io/.
+Read the documentation and more at `molecule.readthedocs.io`_.
 
 .. _get-involved:
 
@@ -45,6 +45,7 @@ Get Involved
 * For the full list of Ansible email Lists, IRC channels see the
   `communication page`_.
 
+.. _`molecule.readthedocs.io`: https://molecule.readthedocs.io/
 .. _`Freenode`: https://freenode.net
 .. _`molecule-users Forum`: https://groups.google.com/forum/#!forum/molecule-users
 .. _`wiki`: https://github.com/ansible/community/wiki/Molecule
