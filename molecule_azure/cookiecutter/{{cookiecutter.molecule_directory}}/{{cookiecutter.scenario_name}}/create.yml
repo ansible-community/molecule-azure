@@ -5,7 +5,7 @@
   connection: local
   gather_facts: false
   vars:
-    resource_group_name: molecule
+    resource_group_name: molecule-azure
     location: "{{ lookup('env', 'AZURE_REGION') or 'westus' }}"
     ssh_user: molecule
     ssh_port: 22
