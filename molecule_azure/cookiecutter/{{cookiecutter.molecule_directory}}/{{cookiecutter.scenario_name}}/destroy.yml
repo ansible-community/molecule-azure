@@ -4,8 +4,9 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  no_log: "{{ molecule_no_log }}"
   vars:
-    resource_group_name: molecule-azure
+    resource_group_name: molecule
     virtual_network_name: molecule_vnet
     subnet_name: molecule_subnet
   tasks:
