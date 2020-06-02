@@ -14,7 +14,7 @@
       azure_rm_resourcegroup:
         name: "{{ resource_group_name }}"
         state: absent
-        force_delete_nonempty: yes
+        force_delete_nonempty: true
       register: rg
 
     # Mandatory configuration for Molecule to function.
