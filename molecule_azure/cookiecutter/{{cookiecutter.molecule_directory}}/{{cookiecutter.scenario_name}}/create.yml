@@ -31,12 +31,12 @@
         address_prefix_cidr: 10.10.1.0/24
         virtual_network_name: "{{ virtual_network_name }}"
 
-    - name: Create keypair
+    - name: Create key pair
       user:
         name: "{{ lookup('env', 'USER') }}"
         generate_ssh_key: true
         ssh_key_file: "{{ keypair_path }}"
-      register: keypair
+      register: key_pair
 
     - name: Create molecule instance(s)
       azure_rm_virtualmachine:
@@ -48,7 +48,7 @@
         ssh_password_enabled: false
         ssh_public_keys:
           - path: "/home/{{ ssh_user }}/.ssh/authorized_keys"
-            key_data: "{{ keypair.ssh_public_key }}"
+            key_data: "{{ key_pair.ssh_public_key }}"
         image:
           offer: CentOS
           publisher: OpenLogic

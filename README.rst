@@ -6,8 +6,8 @@ Molecule Azure Plugin
    :target: https://badge.fury.io/py/molecule-azure
    :alt: PyPI Package
 
-.. image:: https://zuul-ci.org/gated.svg
-   :target: https://dashboard.zuul.ansible.com/t/ansible/builds?project=ansible-community/molecule-azure
+.. image:: https://github.com/ansible-community/molecule-azure/workflows/tox/badge.svg
+   :target: https://github.com/ansible-community/molecule-azure/actions
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/python/black
