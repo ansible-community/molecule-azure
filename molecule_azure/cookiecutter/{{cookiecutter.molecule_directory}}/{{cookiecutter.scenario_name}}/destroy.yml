@@ -10,50 +10,12 @@
     virtual_network_name: molecule_vnet
     subnet_name: molecule_subnet
   tasks:
-    - name: Destroy molecule instance(s)
-      azure_rm_virtualmachine:
-        resource_group: "{{ resource_group_name }}"
-        name: "{{ item.name }}"
-        state: absent
-        remove_on_absent:
-          - all_autocreated
-      register: server
-      with_items: "{{ molecule_yml.platforms }}"
-      async: 7200
-      poll: 0
-
-    - name: Wait for instance(s) deletion to complete
-      async_status:
-        jid: "{{ item.ansible_job_id }}"
-      register: azure_jobs
-      until: azure_jobs.finished
-      retries: 300
-      with_items: "{{ server.results }}"
-      # avoid failure when resource_group is already missing, as we remove it later anyway
-      failed_when: false
-
-    - name: Destroy subnet
-      azure_rm_subnet:
-        resource_group: "{{ resource_group_name }}"
-        name: "{{ subnet_name }}"
-        virtual_network_name: "{{ virtual_network_name }}"
-        state: absent
-      # avoid failure when resource_group is already missing, as we remove it later anyway
-      failed_when: false
-
-    - name: Destroy virtual network
-      azure_rm_virtualnetwork:
-        resource_group: "{{ resource_group_name }}"
-        name: "{{ virtual_network_name }}"
-        state: absent
-      # avoid failure when resource_group is already missing, as we remove it later anyway
-      failed_when: false
-
-    - name: Destroy resource group
+    - name: Destroy resource group and all associated resources
       azure_rm_resourcegroup:
         name: "{{ resource_group_name }}"
         state: absent
         force_delete_nonempty: true
+      register: rg
 
     # Mandatory configuration for Molecule to function.
 
@@ -65,5 +27,5 @@
       copy:
         content: "{{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }}"
         dest: "{{ molecule_instance_config }}"
-      when: server.changed | bool
+      when: rg.changed | bool
 {%- endraw %}
